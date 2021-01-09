@@ -2,10 +2,13 @@
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            Updater updater = new Updater();
-            updater.RunUpdater();
+            if (args.Length > 0)
+            {
+                Updater updater = new Updater();
+                updater.RunUpdater(args);
+            }
         }
     }
 }

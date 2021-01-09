@@ -204,6 +204,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Executers\Executer.cs" />
     <Compile Include="Executers\Exporter.cs" />
     <Compile Include="Executers\Parser.cs" />
     <Compile Include="Extensions\DictionaryExtension.cs" />

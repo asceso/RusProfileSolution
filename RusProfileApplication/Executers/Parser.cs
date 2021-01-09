@@ -298,7 +298,7 @@ namespace RusProfileApplication.Executers
 
             return card;
         }
-        private void SolveCaptcha(IWebDriver driver, string URL)
+        public void SolveCaptcha(IWebDriver driver, string URL)
         {
             string dsKey = driver.FindElement(By.XPath("//p[@class='g-recaptcha']")).GetAttribute("data-sitekey");
 

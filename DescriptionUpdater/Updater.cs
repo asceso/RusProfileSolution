@@ -8,7 +8,7 @@ namespace DescriptionUpdater
 {
     class Updater
     {
-        internal void RunUpdater()
+        internal void RunUpdater(string[] args)
         {
             string withDirPath = Environment.CurrentDirectory + "\\With description";
             string noDirPath = Environment.CurrentDirectory + "\\No description";
@@ -26,12 +26,27 @@ namespace DescriptionUpdater
 
                 ExcelWorksheet sheet = pack.Workbook.Worksheets.FirstOrDefault();
 
-                int last_row = sheet.Cells.Where(c => c.Start.Column == 2 && !c.Value.ToString().Equals("")).Last().End.Row;
-                int ppNum = 1;
-                for (int i = 2; i < last_row; i++)
+                int start_number = Convert.ToInt32(args[0]);
+                int collumn_number = Convert.ToInt32(args[1]);
+                int last_row = 0;
+                if (args.Length == 3)
                 {
-                    string value = sheet.Cells[i, 8].Value.ToString();
-                    sheet.Cells[i, 8].Value = value.GetInteger();
+                    last_row = Convert.ToInt32(args[2]);
+                }
+                else
+                {
+                    last_row = sheet.Cells.Where(c => c.Start.Column == collumn_number && !c.Value.ToString().Equals("")).Last().End.Row;
+                }
+                int ppNum = 1;
+
+                for (int i = start_number; i <= last_row; i++)
+                {
+                    object value = sheet.Cells[i, collumn_number].Value;
+                    if (value == null)
+                    {
+                        continue;
+                    }
+                    sheet.Cells[i, collumn_number].Value = value.ToString().GetInteger();
                     sheet.Cells[i, 1].Value = ppNum++;
                 }
 
