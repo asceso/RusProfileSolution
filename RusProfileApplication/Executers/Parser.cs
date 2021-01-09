@@ -46,11 +46,15 @@ namespace RusProfileApplication.Executers
         //Thread.Sleep(3000);
         //driver.SwitchTo().DefaultContent();
         #endregion
-        private readonly string CapMonsterKey = "f15b6f3a8854225ab7acb77a8f001b3e";
+        private readonly string CapMonsterKey;
 
         private bool PagesFounded = false;
         private readonly int BaseSleepLoading = 300;
 
+        public Parser(string capthca_key)
+        {
+            CapMonsterKey = capthca_key;
+        }
         public IWebDriver CreateDriver(string extension_directory, AuthCredetials credentials, Proxy proxy = null)
         {
             ChromeOptions options = new ChromeOptions();

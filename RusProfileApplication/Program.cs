@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Media;
-using OfficeOpenXml;
-using OpenQA.Selenium;
+﻿using System.Configuration;
 using RusProfileApplication.Executers;
-using RusProfileApplication.Models;
 
 namespace RusProfileApplication
 {
@@ -19,8 +11,29 @@ namespace RusProfileApplication
 
         private static void Main(string[] args)
         {
-            //Executer.ExecuteFromLinks(args);
-            Executer.ExecuteFromSearch();
+            string mode = string.Empty;
+            foreach (string argument in args)
+            {
+                if (argument.Contains("Mode ="))
+                {
+                    mode = argument.Replace("Mode = ", string.Empty);
+                }
+            }
+            switch (mode)
+            {
+                case "links":
+                    {
+                        Executer.ExecuteFromLinks(args);
+                    }
+                    break;
+                case "search":
+                    {
+                        Executer.ExecuteFromSearch();
+                    }
+                    break;
+                default:
+                    break;
+            }
 
             //exporter.CreateFiles("Links.xlsx");
             #region export links

@@ -8,6 +8,7 @@ namespace LinksParser
     internal class Program
     {
         private static readonly string OutDir = ConfigurationManager.AppSettings["OutputDirectory"];
+        private static readonly string CaptchaApi = ConfigurationManager.AppSettings["CaptchaApiKey"];
         static void Main(string[] args)
         {
             //string BaseURL = string.Empty;
@@ -25,7 +26,7 @@ namespace LinksParser
                 Console.ReadKey();
                 Environment.Exit(0);
             }
-            Parser parser = new Parser();
+            Parser parser = new Parser(CaptchaApi);
             Dictionary<string, string> links = parser.ParseUrls(BaseURL).Result;
         }
     }

@@ -17,6 +17,7 @@ namespace RusProfileApplication.Executers
         private static readonly string OutDir = ConfigurationManager.AppSettings["OutputDirectory"];
         private static readonly string ExtDir = ConfigurationManager.AppSettings["ExtensionDirectory"];
         private static readonly string ExportedDir = ConfigurationManager.AppSettings["ExportedDirectory"];
+        private static readonly string CaptchaApi = ConfigurationManager.AppSettings["CaptchaApiKey"];
         public static void ExecuteFromLinks(string[] args)
         {
             Proxy proxy = null;
@@ -88,7 +89,7 @@ namespace RusProfileApplication.Executers
                 //{"439990", "https://www.rusprofile.ru/codes/439990/sankt-peterburg/" } ,
             };
 
-            Parser parser = new Parser();
+            Parser parser = new Parser(CaptchaApi);
             Exporter exporter = new Exporter(ExportedDir);
 
             AuthCredetials credentials = new AuthCredetials
@@ -193,7 +194,7 @@ namespace RusProfileApplication.Executers
         }
         public static void ExecuteFromSearch()
         {
-            Parser parser = new Parser();
+            Parser parser = new Parser(CaptchaApi);
             Exporter exporter = new Exporter(ExportedDir);
 
             AuthCredetials credentials = new AuthCredetials
